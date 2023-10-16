@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style2.css"/>
+    <title>Document</title>
+</head>
+<body>
+    <div class="stopwatch">
+        <h1 id="displayTime">00 : 00 : 00</h1>
+        <div class="buttons">
+            <img src="https://tse4.mm.bing.net/th?id=OIP.vkaqNQgrCx4U6U81h4EuYQHaHa&pid=Api&P=0&h=180" id="img1" height="55px" width="55px" style="border-radius:50px" onClick="watchStop()"/>
+            <img src="https://tse1.mm.bing.net/th?id=OIP.N4RGlwVuvnsQkwiPhdKU5AHaHa&pid=Api&P=0&h=180" id="img2" height="70px" width="70px" style="border-radius:50px" onClick="watchStart()"/>
+            <img src="https://tse1.mm.bing.net/th?id=OIP.kq1aVa56gUEX0_UtasNLxAHaHa&pid=Api&P=0&h=180" id="img3" height="55px" width="55px" onClick="watchReset()"/>
+        </div>
+    </div>
+    <script>
+    let [seconds,minutes,hours]=[0,0,0];
+    let displayTime=document.getElementById("displayTime");
+    let timer=null;
+    
+    function stopwatch()
+    {
+        seconds++;
+        if(seconds==60)
+        {
+            seconds=0;
+            minutes++;
+            if(minutes==60)
+            {
+                minutes=0;
+                hours++;
+            }
+        }
+
+        let h=hours<10?"0"+hours:hours;
+        let m=minutes<10?"0"+minutes:minutes;
+        let s=seconds<10?"0"+seconds:seconds;
+        displayTime.innerHTML=h+" : "+m+" : "+s;
+    }
+    
+    function watchStart()
+    {
+        if(timer!==null)
+        {
+            clearInterval(timer);
+        }
+        timer = setInterval(stopwatch,1000);
+        
+    }
+
+    function watchStop()
+    {
+        clearInterval(timer);
+    }
+
+    function watchReset()
+    {
+        clearInterval(timer);
+        [seconds,minutes,hours]=[0,0,0];
+        displayTime.innerHTML="00 : 00 : 00";
+    }
+    </script>
+</body>
+</html>
